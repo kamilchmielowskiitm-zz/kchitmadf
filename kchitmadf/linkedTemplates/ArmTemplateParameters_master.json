@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "kchitmadf"
+		},
+		"kchitmdl2_accountKey": {
+			"value": ""
+		},
+		"Azurekchitm_properties_typeProperties_connectionString_secretName": {
+			"value": "kchitmdb"
+		},
+		"kchitmdl2_properties_typeProperties_url": {
+			"value": "https://kchdl22.dfs.core.windows.net"
+		},
+		"kchitmkv_properties_typeProperties_baseUrl": {
+			"value": "https://dkchitmkv.vault.azure.net/"
+		},
+		"kchitmlocaldb_properties_typeProperties_connectionString_secretName": {
+			"value": "kchdblocal"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
