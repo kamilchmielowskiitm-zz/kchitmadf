@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "kchitmadf"
 		},
-		"kchitmdl2_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'kchitmdl2'"
-		},
 		"Azurekchitm_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "kchitmdb"
@@ -939,12 +935,18 @@
 				"typeProperties": {
 					"url": "[parameters('kchitmdl2_properties_typeProperties_url')]",
 					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('kchitmdl2_accountKey')]"
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kchitmkv",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "kchdl22"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/kchitmkv')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/kchitmkv')]",
