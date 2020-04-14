@@ -538,12 +538,6 @@
 						}
 					}
 				],
-				"parameters": {
-					"test": {
-						"type": "string",
-						"defaultValue": "test"
-					}
-				},
 				"annotations": []
 			},
 			"dependsOn": [
