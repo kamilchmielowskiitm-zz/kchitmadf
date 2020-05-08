@@ -8,17 +8,17 @@
 		"kchbizdl2_accountKey": {
 			"value": ""
 		},
-		"kchbizkv_properties_typeProperties_baseUrl": {
-			"value": "https://kchbizkeyvault.vault.azure.net/"
-		},
-		"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
-			"value": "kchdblocal"
-		},
 		"kchbizazuredb_properties_typeProperties_connectionString_secretName": {
 			"value": "kchdbazure"
 		},
 		"kchbizdl2_properties_typeProperties_url": {
 			"value": "https://kchbizdl2.dfs.core.windows.net"
+		},
+		"kchbizkv_properties_typeProperties_baseUrl": {
+			"value": "https://kchbizkeyvault.vault.azure.net/"
+		},
+		"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
+			"value": "kchdblocal"
 		},
 		"containerUri": {
 			"value": ""

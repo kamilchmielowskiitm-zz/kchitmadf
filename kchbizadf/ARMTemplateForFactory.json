@@ -11,14 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'kchbizdl2'"
 		},
-		"kchbizkv_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kchbizkeyvault.vault.azure.net/"
-		},
-		"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "kchdblocal"
-		},
 		"kchbizazuredb_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "kchdbazure"
@@ -26,6 +18,14 @@
 		"kchbizdl2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://kchbizdl2.dfs.core.windows.net"
+		},
+		"kchbizkv_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kchbizkeyvault.vault.azure.net/"
+		},
+		"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "kchdblocal"
 		}
 	},
 	"variables": {
@@ -303,8 +303,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "CustomerKey",
-											"type": "Int32"
+											"name": "CustomerKey"
 										}
 									}
 								]
@@ -908,42 +907,41 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger1')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
+			"name": "[concat(parameters('factoryName'), '/kchbizazuredb')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "_master_pipeline",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
+				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2020-04-14T13:50:00.000Z",
-						"timeZone": "UTC"
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kchbizkv",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('kchbizazuredb_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/_master_pipeline')]"
+				"[concat(variables('factoryId'), '/linkedServices/kchbizkv')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/kchbizlocal')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"name": "[concat(parameters('factoryName'), '/kchbizdl2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('kchbizdl2_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('kchbizdl2_accountKey')]"
+					}
+				}
 			},
 			"dependsOn": []
 		},
@@ -988,41 +986,42 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/kchbizazuredb')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/trigger1')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "kchbizkv",
-							"type": "LinkedServiceReference"
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "_master_pipeline",
+							"type": "PipelineReference"
 						},
-						"secretName": "[parameters('kchbizazuredb_properties_typeProperties_connectionString_secretName')]"
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2020-04-14T13:50:00.000Z",
+						"timeZone": "UTC"
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kchbizkv')]"
+				"[concat(variables('factoryId'), '/pipelines/_master_pipeline')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/kchbizdl2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/kchbizlocal')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('kchbizdl2_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('kchbizdl2_accountKey')]"
-					}
-				}
+				"type": "SelfHosted",
+				"typeProperties": {}
 			},
 			"dependsOn": []
 		}

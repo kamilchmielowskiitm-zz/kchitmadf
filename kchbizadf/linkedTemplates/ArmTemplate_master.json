@@ -11,14 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'kchbizdl2'"
 		},
-		"kchbizkv_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kchbizkeyvault.vault.azure.net/"
-		},
-		"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "kchdblocal"
-		},
 		"kchbizazuredb_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "kchdbazure"
@@ -26,6 +18,14 @@
 		"kchbizdl2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://kchbizdl2.dfs.core.windows.net"
+		},
+		"kchbizkv_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kchbizkeyvault.vault.azure.net/"
+		},
+		"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "kchdblocal"
 		},
 		"containerUri": {
 			"type": "string",
@@ -57,17 +57,17 @@
 					"kchbizdl2_accountKey": {
 						"value": "[parameters('kchbizdl2_accountKey')]"
 					},
-					"kchbizkv_properties_typeProperties_baseUrl": {
-						"value": "[parameters('kchbizkv_properties_typeProperties_baseUrl')]"
-					},
 					"kchbizdl2_properties_typeProperties_url": {
 						"value": "[parameters('kchbizdl2_properties_typeProperties_url')]"
 					},
-					"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('kchbizlocaldb_properties_typeProperties_connectionString_secretName')]"
+					"kchbizkv_properties_typeProperties_baseUrl": {
+						"value": "[parameters('kchbizkv_properties_typeProperties_baseUrl')]"
 					},
 					"kchbizazuredb_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('kchbizazuredb_properties_typeProperties_connectionString_secretName')]"
+					},
+					"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('kchbizlocaldb_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},

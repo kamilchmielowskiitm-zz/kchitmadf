@@ -11,21 +11,21 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'kchbizdl2'"
 		},
-		"kchbizkv_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kchbizkeyvault.vault.azure.net/"
-		},
 		"kchbizdl2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://kchbizdl2.dfs.core.windows.net"
 		},
-		"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
+		"kchbizkv_properties_typeProperties_baseUrl": {
 			"type": "string",
-			"defaultValue": "kchdblocal"
+			"defaultValue": "https://kchbizkeyvault.vault.azure.net/"
 		},
 		"kchbizazuredb_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "kchdbazure"
+		},
+		"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "kchdblocal"
 		}
 	},
 	"variables": {
@@ -33,12 +33,19 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/kchbizlocal')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"name": "[concat(parameters('factoryName'), '/kchbizdl2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('kchbizdl2_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('kchbizdl2_accountKey')]"
+					}
+				}
 			},
 			"dependsOn": []
 		},
@@ -56,19 +63,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/kchbizdl2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/kchbizlocal')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('kchbizdl2_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('kchbizdl2_accountKey')]"
-					}
-				}
+				"type": "SelfHosted",
+				"typeProperties": {}
 			},
 			"dependsOn": []
 		},
@@ -190,6 +190,28 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/kchbizazuredb')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kchbizkv",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('kchbizazuredb_properties_typeProperties_connectionString_secretName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/kchbizkv')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/kchbizlocaldb')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -213,28 +235,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/kchbizlocal')]",
-				"[concat(variables('factoryId'), '/linkedServices/kchbizkv')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/kchbizazuredb')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "kchbizkv",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('kchbizazuredb_properties_typeProperties_connectionString_secretName')]"
-					}
-				}
-			},
-			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/kchbizkv')]"
 			]
 		},
@@ -873,8 +873,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "CustomerKey",
-											"type": "Int32"
+											"name": "CustomerKey"
 										}
 									}
 								]
