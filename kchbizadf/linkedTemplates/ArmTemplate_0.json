@@ -73,7 +73,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dest_kchitmdl_City_parquet')]",
+			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_City_parquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -103,7 +103,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dest_kchitmdl_Customer_parquet')]",
+			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_Customer_parquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -133,7 +133,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dest_kchitmdl_Date_csv')]",
+			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_Date_csv')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -160,7 +160,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dest_kchitmdl_FactSale_parquet')]",
+			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_FactSale_parquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -239,7 +239,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/src_azurekchitm_DimCustomer_tbl')]",
+			"name": "[concat(parameters('factoryName'), '/src_kchbizsqlserver_DimCustomer_tbl')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -310,7 +310,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/src_azurekchitm_FactSale_tbl')]",
+			"name": "[concat(parameters('factoryName'), '/src_kchbizsqlserver_FactSale_tbl')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -665,7 +665,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "dest_kchitmdl_City_parquet",
+								"referenceName": "dest_kchbizdl2_City_parquet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -676,7 +676,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/src_kchitmlocal_City_tbl')]",
-				"[concat(variables('factoryId'), '/datasets/dest_kchitmdl_City_parquet')]"
+				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_City_parquet')]"
 			]
 		},
 		{
@@ -735,14 +735,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "src_azurekchitm_DimCustomer_tbl",
+								"referenceName": "src_kchbizsqlserver_DimCustomer_tbl",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dest_kchitmdl_Customer_parquet",
+								"referenceName": "dest_kchbizdl2_Customer_parquet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -752,8 +752,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/src_azurekchitm_DimCustomer_tbl')]",
-				"[concat(variables('factoryId'), '/datasets/dest_kchitmdl_Customer_parquet')]"
+				"[concat(variables('factoryId'), '/datasets/src_kchbizsqlserver_DimCustomer_tbl')]",
+				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_Customer_parquet')]"
 			]
 		},
 		{
@@ -810,7 +810,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "dest_kchitmdl_Date_csv",
+								"referenceName": "dest_kchbizdl2_Date_csv",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -821,7 +821,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/src_kchitmlocal_Date_tbl')]",
-				"[concat(variables('factoryId'), '/datasets/dest_kchitmdl_Date_csv')]"
+				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_Date_csv')]"
 			]
 		},
 		{
@@ -880,14 +880,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "src_azurekchitm_FactSale_tbl",
+								"referenceName": "src_kchbizsqlserver_FactSale_tbl",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dest_kchitmdl_FactSale_parquet",
+								"referenceName": "dest_kchbizdl2_FactSale_parquet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -897,8 +897,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/src_azurekchitm_FactSale_tbl')]",
-				"[concat(variables('factoryId'), '/datasets/dest_kchitmdl_FactSale_parquet')]"
+				"[concat(variables('factoryId'), '/datasets/src_kchbizsqlserver_FactSale_tbl')]",
+				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_FactSale_parquet')]"
 			]
 		},
 		{
