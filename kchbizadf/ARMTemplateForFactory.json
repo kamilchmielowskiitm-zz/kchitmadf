@@ -1249,7 +1249,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "FactSalecsv",
+						"fileName": "FactSale.csv",
 						"fileSystem": "raw"
 					},
 					"columnDelimiter": ",",
