@@ -33,7 +33,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/CopyDimCity')]",
+			"name": "[concat(parameters('factoryName'), '/CopyDimCity_parquet')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -209,7 +209,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CopyDimCustomer')]",
+			"name": "[concat(parameters('factoryName'), '/CopyDimCustomer_parquet')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -368,7 +368,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CopyDimDate')]",
+			"name": "[concat(parameters('factoryName'), '/CopyDimDate_csv')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -581,7 +581,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CopyFactSale')]",
+			"name": "[concat(parameters('factoryName'), '/CopyFactSale_parquet')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -839,6 +839,73 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/CopyFactSale_csv')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_d6f",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "Fact.Sale_V"
+							},
+							{
+								"name": "Destination",
+								"value": "raw//FactSalecsv"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "src_kchitmlocal_FactSale_tbl",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dest_kchbizdl2_FactSale_csv",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/src_kchitmlocal_FactSale_tbl')]",
+				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_FactSale_csv')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/_master_pipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -851,7 +918,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "CopyDimCity",
+								"referenceName": "CopyDimCity_parquet",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -872,7 +939,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "CopyDimCustomer",
+								"referenceName": "CopyDimCustomer_parquet",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -893,7 +960,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "CopyDimDate",
+								"referenceName": "CopyDimDate_csv",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -914,7 +981,28 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "CopyFactSale",
+								"referenceName": "CopyFactSale_parquet",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CopyFactSalecsv",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "CopyFactSale",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CopyFactSale_csv",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
@@ -925,10 +1013,144 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/CopyDimCity')]",
-				"[concat(variables('factoryId'), '/pipelines/CopyDimCustomer')]",
-				"[concat(variables('factoryId'), '/pipelines/CopyDimDate')]",
-				"[concat(variables('factoryId'), '/pipelines/CopyFactSale')]"
+				"[concat(variables('factoryId'), '/pipelines/CopyDimCity_parquet')]",
+				"[concat(variables('factoryId'), '/pipelines/CopyDimCustomer_parquet')]",
+				"[concat(variables('factoryId'), '/pipelines/CopyDimDate_csv')]",
+				"[concat(variables('factoryId'), '/pipelines/CopyFactSale_parquet')]",
+				"[concat(variables('factoryId'), '/pipelines/CopyFactSale_csv')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_FactSale_csv')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "kchbizdl2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "FactSalecsv",
+						"fileSystem": "raw"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/kchbizdl2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/src_kchitmlocal_FactSale_tbl')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "kchbizlocaldb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "SaleKey",
+						"type": "bigint"
+					},
+					{
+						"name": "CityKey",
+						"type": "int"
+					},
+					{
+						"name": "CustomerKey",
+						"type": "int"
+					},
+					{
+						"name": "BillToCustomerKey",
+						"type": "int"
+					},
+					{
+						"name": "StockItemKey",
+						"type": "int"
+					},
+					{
+						"name": "InvoiceDateKey",
+						"type": "date"
+					},
+					{
+						"name": "DeliveryDateKey",
+						"type": "date"
+					},
+					{
+						"name": "SalespersonKey",
+						"type": "int"
+					},
+					{
+						"name": "WWIInvoiceID",
+						"type": "int"
+					},
+					{
+						"name": "Description",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Package",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Quantity",
+						"type": "int"
+					},
+					{
+						"name": "UnitPrice",
+						"type": "decimal"
+					},
+					{
+						"name": "TaxRate",
+						"type": "decimal"
+					},
+					{
+						"name": "TotalExcludingTax",
+						"type": "decimal"
+					},
+					{
+						"name": "TaxAmount",
+						"type": "decimal"
+					},
+					{
+						"name": "Profit",
+						"type": "decimal"
+					},
+					{
+						"name": "TotalIncludingTax",
+						"type": "decimal"
+					},
+					{
+						"name": "TotalDryItems",
+						"type": "int"
+					},
+					{
+						"name": "TotalChillerItems",
+						"type": "int"
+					},
+					{
+						"name": "LineageKey",
+						"type": "int"
+					}
+				],
+				"typeProperties": {
+					"schema": "Fact",
+					"table": "Sale_V"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/kchbizlocaldb')]"
 			]
 		},
 		{
