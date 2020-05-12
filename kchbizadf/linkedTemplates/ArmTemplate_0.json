@@ -178,12 +178,7 @@
 					},
 					"compressionCodec": "snappy"
 				},
-				"schema": [
-					{
-						"name": "CustomerKey",
-						"type": "INT32"
-					}
-				]
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/kchbizdl2')]"
@@ -650,7 +645,17 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "CustomerKey"
+											"name": "CustomerKey",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "WWICityID",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "WWICityID"
 										}
 									}
 								]
@@ -872,7 +877,8 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "CustomerKey"
+											"name": "CustomerKey",
+											"type": "Int32"
 										}
 									}
 								]
