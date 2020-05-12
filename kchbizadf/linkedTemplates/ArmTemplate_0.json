@@ -821,7 +821,89 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "CustomerKey"
+											"name": "CustomerKey",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "WWICustomerID",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "WWICustomerID"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Customer"
+										}
+									},
+									{
+										"source": {
+											"name": "BillToCustomer",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BillToCustomer"
+										}
+									},
+									{
+										"source": {
+											"name": "Category",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Category"
+										}
+									},
+									{
+										"source": {
+											"name": "BuyingGroup",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BuyingGroup"
+										}
+									},
+									{
+										"source": {
+											"name": "PrimaryContact",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PrimaryContact"
+										}
+									},
+									{
+										"source": {
+											"name": "PostalCode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PostalCode"
+										}
+									},
+									{
+										"source": {
+											"name": "ValidFrom",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ValidFrom"
+										}
+									},
+									{
+										"source": {
+											"name": "ValidTo",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ValidTo"
 										}
 									}
 								]
@@ -893,7 +975,152 @@
 									"fileExtension": ".txt"
 								}
 							},
-							"enableStaging": false
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Date",
+											"type": "DateTime"
+										},
+										"sink": {
+											"type": "DateTime",
+											"ordinal": 1
+										}
+									},
+									{
+										"source": {
+											"name": "DayNumber",
+											"type": "Int32"
+										},
+										"sink": {
+											"type": "Int32",
+											"ordinal": 2
+										}
+									},
+									{
+										"source": {
+											"name": "Day",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 3
+										}
+									},
+									{
+										"source": {
+											"name": "Month",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 4
+										}
+									},
+									{
+										"source": {
+											"name": "ShortMonth",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 5
+										}
+									},
+									{
+										"source": {
+											"name": "CalendarMonthNumber",
+											"type": "Int32"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 6
+										}
+									},
+									{
+										"source": {
+											"name": "CalendarMonthLabel",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 7
+										}
+									},
+									{
+										"source": {
+											"name": "CalendarYear",
+											"type": "Int32"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 8
+										}
+									},
+									{
+										"source": {
+											"name": "CalendarYearLabel",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 9
+										}
+									},
+									{
+										"source": {
+											"name": "FiscalMonthNumber",
+											"type": "Int32"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 10
+										}
+									},
+									{
+										"source": {
+											"name": "FiscalMonthLabel",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 11
+										}
+									},
+									{
+										"source": {
+											"name": "FiscalYear",
+											"type": "Int32"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 12
+										}
+									},
+									{
+										"source": {
+											"name": "FiscalYearLabel",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 13
+										}
+									},
+									{
+										"source": {
+											"name": "ISOWeekNumber",
+											"type": "Int32"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 14
+										}
+									}
+								]
+							}
 						},
 						"inputs": [
 							{
@@ -962,12 +1189,192 @@
 								"mappings": [
 									{
 										"source": {
+											"name": "SaleKey",
+											"type": "Int64"
+										},
+										"sink": {
+											"name": "SaleKey"
+										}
+									},
+									{
+										"source": {
+											"name": "CityKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CityKey"
+										}
+									},
+									{
+										"source": {
 											"name": "CustomerKey",
 											"type": "Int32"
 										},
 										"sink": {
 											"name": "CustomerKey",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "BillToCustomerKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "BillToCustomerKey"
+										}
+									},
+									{
+										"source": {
+											"name": "StockItemKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "StockItemKey"
+										}
+									},
+									{
+										"source": {
+											"name": "InvoiceDateKey",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "InvoiceDateKey"
+										}
+									},
+									{
+										"source": {
+											"name": "DeliveryDateKey",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DeliveryDateKey"
+										}
+									},
+									{
+										"source": {
+											"name": "SalespersonKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "SalespersonKey"
+										}
+									},
+									{
+										"source": {
+											"name": "WWIInvoiceID",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "WWIInvoiceID"
+										}
+									},
+									{
+										"source": {
+											"name": "Description",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Description"
+										}
+									},
+									{
+										"source": {
+											"name": "Package",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Package"
+										}
+									},
+									{
+										"source": {
+											"name": "Quantity",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Quantity"
+										}
+									},
+									{
+										"source": {
+											"name": "UnitPrice",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "UnitPrice"
+										}
+									},
+									{
+										"source": {
+											"name": "TaxRate",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TaxRate"
+										}
+									},
+									{
+										"source": {
+											"name": "TotalExcludingTax",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TotalExcludingTax"
+										}
+									},
+									{
+										"source": {
+											"name": "TaxAmount",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TaxAmount"
+										}
+									},
+									{
+										"source": {
+											"name": "Profit",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Profit"
+										}
+									},
+									{
+										"source": {
+											"name": "TotalIncludingTax",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TotalIncludingTax"
+										}
+									},
+									{
+										"source": {
+											"name": "TotalDryItems",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "TotalDryItems"
+										}
+									},
+									{
+										"source": {
+											"name": "TotalChillerItems",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "TotalChillerItems"
+										}
+									},
+									{
+										"source": {
+											"name": "LineageKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "LineageKey"
 										}
 									}
 								]
