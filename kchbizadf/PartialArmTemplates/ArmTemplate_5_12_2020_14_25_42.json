@@ -6,26 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "kchbizadf"
-		},
-		"kchbizdl2_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'kchbizdl2'"
-		},
-		"kchbizazuredb_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "kchdbazure"
-		},
-		"kchbizdl2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://kchbizdl2.dfs.core.windows.net"
-		},
-		"kchbizkv_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kchbizkeyvault.vault.azure.net/"
-		},
-		"kchbizlocaldb_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "kchdblocal"
 		}
 	},
 	"variables": {
@@ -188,15 +168,13 @@
 						"inputs": [
 							{
 								"referenceName": "src_kchitmlocal_DimCity_tbl",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "dest_kchbizdl2_DimCity_parquet",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -347,15 +325,13 @@
 						"inputs": [
 							{
 								"referenceName": "src_kchbizsqlserver_DimCustomer_tbl",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "dest_kchbizdl2_DimCustomer_parquet",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -363,7 +339,6 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/src_kchbizsqlserver_DimCustomer_tbl')]",
 				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_DimCustomer_parquet')]"
 			]
 		},
@@ -560,15 +535,13 @@
 						"inputs": [
 							{
 								"referenceName": "src_kchitmlocal_DimDate_tbl",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "dest_kchbizdl2_DimDate_csv",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -578,357 +551,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/src_kchitmlocal_DimDate_tbl')]",
 				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_DimDate_csv')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyFactSale')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "CopyFactSale",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "Fact.Sale_V"
-							},
-							{
-								"name": "Destination",
-								"value": "raw//Sale.parquet"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00"
-							},
-							"sink": {
-								"type": "ParquetSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "SaleKey",
-											"type": "Int64"
-										},
-										"sink": {
-											"name": "SaleKey"
-										}
-									},
-									{
-										"source": {
-											"name": "CityKey",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "CityKey"
-										}
-									},
-									{
-										"source": {
-											"name": "CustomerKey",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "CustomerKey",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "BillToCustomerKey",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "BillToCustomerKey"
-										}
-									},
-									{
-										"source": {
-											"name": "StockItemKey",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "StockItemKey"
-										}
-									},
-									{
-										"source": {
-											"name": "InvoiceDateKey",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "InvoiceDateKey"
-										}
-									},
-									{
-										"source": {
-											"name": "DeliveryDateKey",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "DeliveryDateKey"
-										}
-									},
-									{
-										"source": {
-											"name": "SalespersonKey",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "SalespersonKey"
-										}
-									},
-									{
-										"source": {
-											"name": "WWIInvoiceID",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "WWIInvoiceID"
-										}
-									},
-									{
-										"source": {
-											"name": "Description",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Description"
-										}
-									},
-									{
-										"source": {
-											"name": "Package",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Package"
-										}
-									},
-									{
-										"source": {
-											"name": "Quantity",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Quantity"
-										}
-									},
-									{
-										"source": {
-											"name": "UnitPrice",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "UnitPrice"
-										}
-									},
-									{
-										"source": {
-											"name": "TaxRate",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "TaxRate"
-										}
-									},
-									{
-										"source": {
-											"name": "TotalExcludingTax",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "TotalExcludingTax"
-										}
-									},
-									{
-										"source": {
-											"name": "TaxAmount",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "TaxAmount"
-										}
-									},
-									{
-										"source": {
-											"name": "Profit",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "Profit"
-										}
-									},
-									{
-										"source": {
-											"name": "TotalIncludingTax",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "TotalIncludingTax"
-										}
-									},
-									{
-										"source": {
-											"name": "TotalDryItems",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "TotalDryItems"
-										}
-									},
-									{
-										"source": {
-											"name": "TotalChillerItems",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "TotalChillerItems"
-										}
-									},
-									{
-										"source": {
-											"name": "LineageKey",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "LineageKey"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "src_kchbizsqlserver_FactSale_tbl",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "dest_kchbizdl2_FactSale_parquet",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/src_kchbizsqlserver_FactSale_tbl')]",
-				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_FactSale_parquet')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/_master_pipeline')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "CopyDimCity",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "CopyDimCity",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "CopyDimCustomer",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "CopyDimCity",
-								"dependencyConditions": [
-									"Completed"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "CopyDimCustomer",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "CopyDimDate",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "CopyDimCustomer",
-								"dependencyConditions": [
-									"Completed"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "CopyDimDate",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "CopyFactSale",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "CopyDimDate",
-								"dependencyConditions": [
-									"Completed"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "CopyFactSale",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/CopyDimCity')]",
-				"[concat(variables('factoryId'), '/pipelines/CopyDimCustomer')]",
-				"[concat(variables('factoryId'), '/pipelines/CopyDimDate')]",
-				"[concat(variables('factoryId'), '/pipelines/CopyFactSale')]"
 			]
 		},
 		{
@@ -957,9 +579,7 @@
 					}
 				]
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kchbizdl2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_DimCustomer_parquet')]",
@@ -987,9 +607,7 @@
 					}
 				]
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kchbizdl2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_DimDate_csv')]",
@@ -1014,9 +632,7 @@
 				},
 				"schema": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kchbizdl2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_FactSale_parquet')]",
@@ -1039,209 +655,7 @@
 				},
 				"schema": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kchbizdl2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/src_kchbizsqlserver_DimCustomer_tbl')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "kchbizazuredb",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "CustomerKey",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "WWICustomerID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Customer",
-						"type": "nvarchar"
-					},
-					{
-						"name": "BillToCustomer",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Category",
-						"type": "nvarchar"
-					},
-					{
-						"name": "BuyingGroup",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PrimaryContact",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PostalCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ValidFrom",
-						"type": "datetime2",
-						"scale": 7
-					},
-					{
-						"name": "ValidTo",
-						"type": "datetime2",
-						"scale": 7
-					},
-					{
-						"name": "LineageKey",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "Dimension",
-					"table": "Customer_V"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kchbizazuredb')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/src_kchbizsqlserver_FactSale_tbl')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "kchbizazuredb",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "SaleKey",
-						"type": "bigint",
-						"precision": 19
-					},
-					{
-						"name": "CityKey",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CustomerKey",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "BillToCustomerKey",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "StockItemKey",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "InvoiceDateKey",
-						"type": "date"
-					},
-					{
-						"name": "DeliveryDateKey",
-						"type": "date"
-					},
-					{
-						"name": "SalespersonKey",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "WWIInvoiceID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Description",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Package",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Quantity",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "UnitPrice",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 2
-					},
-					{
-						"name": "TaxRate",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 3
-					},
-					{
-						"name": "TotalExcludingTax",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 2
-					},
-					{
-						"name": "TaxAmount",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 2
-					},
-					{
-						"name": "Profit",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 2
-					},
-					{
-						"name": "TotalIncludingTax",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 2
-					},
-					{
-						"name": "TotalDryItems",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "TotalChillerItems",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "LineageKey",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "Fact",
-					"table": "Sale_V"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kchbizazuredb')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/src_kchitmlocal_DimCity_tbl')]",
@@ -1319,9 +733,7 @@
 					"table": "City_V"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kchbizlocaldb')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/src_kchitmlocal_DimDate_tbl')]",
@@ -1402,127 +814,6 @@
 					"schema": "Dimension",
 					"table": "Date_V"
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kchbizlocaldb')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/kchbizazuredb')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "kchbizkv",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('kchbizazuredb_properties_typeProperties_connectionString_secretName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kchbizkv')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/kchbizdl2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('kchbizdl2_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('kchbizdl2_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/kchbizkv')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('kchbizkv_properties_typeProperties_baseUrl')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/kchbizlocaldb')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "kchbizkv",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('kchbizlocaldb_properties_typeProperties_connectionString_secretName')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "kchbizlocal",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/kchbizlocal')]",
-				"[concat(variables('factoryId'), '/linkedServices/kchbizkv')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger1')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "_master_pipeline",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2020-04-14T13:50:00.000Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/_master_pipeline')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/kchbizlocal')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
 			},
 			"dependsOn": []
 		}

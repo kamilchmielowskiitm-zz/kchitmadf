@@ -73,7 +73,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_City_parquet')]",
+			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_DimCity_parquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -86,7 +86,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "City.parquet",
+						"fileName": "DimCity.parquet",
 						"fileSystem": "raw"
 					},
 					"compressionCodec": "snappy"
@@ -103,7 +103,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_Customer_parquet')]",
+			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_DimCustomer_parquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -116,7 +116,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "Customer.parquet",
+						"fileName": "DimCustomer.parquet",
 						"fileSystem": "raw"
 					},
 					"compressionCodec": "snappy"
@@ -133,7 +133,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_Date_csv')]",
+			"name": "[concat(parameters('factoryName'), '/dest_kchbizdl2_DimDate_csv')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -146,7 +146,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "Date.csv",
+						"fileName": "DimDate.csv",
 						"fileSystem": "raw"
 					},
 					"columnDelimiter": ";",
@@ -173,7 +173,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "Sale.parquet",
+						"fileName": "FactSale.parquet",
 						"fileSystem": "raw"
 					},
 					"compressionCodec": "snappy"
@@ -434,7 +434,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/src_kchitmlocal_City_tbl')]",
+			"name": "[concat(parameters('factoryName'), '/src_kchitmlocal_DimCity_tbl')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -514,7 +514,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/src_kchitmlocal_Date_tbl')]",
+			"name": "[concat(parameters('factoryName'), '/src_kchitmlocal_DimDate_tbl')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -752,14 +752,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "src_kchitmlocal_City_tbl",
+								"referenceName": "src_kchitmlocal_DimCity_tbl",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dest_kchbizdl2_City_parquet",
+								"referenceName": "dest_kchbizdl2_DimCity_parquet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -769,8 +769,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/src_kchitmlocal_City_tbl')]",
-				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_City_parquet')]"
+				"[concat(variables('factoryId'), '/datasets/src_kchitmlocal_DimCity_tbl')]",
+				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_DimCity_parquet')]"
 			]
 		},
 		{
@@ -918,7 +918,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "dest_kchbizdl2_Customer_parquet",
+								"referenceName": "dest_kchbizdl2_DimCustomer_parquet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -929,7 +929,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/src_kchbizsqlserver_DimCustomer_tbl')]",
-				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_Customer_parquet')]"
+				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_DimCustomer_parquet')]"
 			]
 		},
 		{
@@ -1124,14 +1124,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "src_kchitmlocal_Date_tbl",
+								"referenceName": "src_kchitmlocal_DimDate_tbl",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "dest_kchbizdl2_Date_csv",
+								"referenceName": "dest_kchbizdl2_DimDate_csv",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1141,8 +1141,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/src_kchitmlocal_Date_tbl')]",
-				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_Date_csv')]"
+				"[concat(variables('factoryId'), '/datasets/src_kchitmlocal_DimDate_tbl')]",
+				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_DimDate_csv')]"
 			]
 		},
 		{
