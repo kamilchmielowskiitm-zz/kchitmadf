@@ -1109,7 +1109,8 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "CityKey"
+											"name": "CityKey",
+											"type": "Int32"
 										}
 									},
 									{
@@ -1118,7 +1119,8 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "WWICityID"
+											"name": "WWICityID",
+											"type": "Int32"
 										}
 									},
 									{
@@ -1127,7 +1129,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "City"
+											"name": "City",
+											"type": "String"
 										}
 									},
 									{
@@ -1136,7 +1139,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "StateProvince"
+											"name": "StateProvince",
+											"type": "String"
 										}
 									},
 									{
@@ -1145,7 +1149,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "Country"
+											"name": "Country",
+											"type": "String"
 										}
 									},
 									{
@@ -1154,7 +1159,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "Continent"
+											"name": "Continent",
+											"type": "String"
 										}
 									},
 									{
@@ -1163,7 +1169,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "SalesTerritory"
+											"name": "SalesTerritory",
+											"type": "String"
 										}
 									},
 									{
@@ -1172,7 +1179,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "Region"
+											"name": "Region",
+											"type": "String"
 										}
 									},
 									{
@@ -1181,7 +1189,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "Subregion"
+											"name": "Subregion",
+											"type": "String"
 										}
 									},
 									{
@@ -1190,7 +1199,8 @@
 											"type": "Int64"
 										},
 										"sink": {
-											"name": "LatestRecordedPopulation"
+											"name": "LatestRecordedPopulation",
+											"type": "Int64"
 										}
 									},
 									{
@@ -1199,7 +1209,8 @@
 											"type": "DateTime"
 										},
 										"sink": {
-											"name": "ValidFrom"
+											"name": "ValidFrom",
+											"type": "DateTime"
 										}
 									},
 									{
@@ -1208,7 +1219,8 @@
 											"type": "DateTime"
 										},
 										"sink": {
-											"name": "ValidTo"
+											"name": "ValidTo",
+											"type": "DateTime"
 										}
 									}
 								]
@@ -1295,7 +1307,8 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "WWICustomerID"
+											"name": "WWICustomerID",
+											"type": "Int32"
 										}
 									},
 									{
@@ -1304,7 +1317,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "Customer"
+											"name": "Customer",
+											"type": "String"
 										}
 									},
 									{
@@ -1313,7 +1327,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "BillToCustomer"
+											"name": "BillToCustomer",
+											"type": "String"
 										}
 									},
 									{
@@ -1322,7 +1337,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "Category"
+											"name": "Category",
+											"type": "String"
 										}
 									},
 									{
@@ -1331,7 +1347,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "BuyingGroup"
+											"name": "BuyingGroup",
+											"type": "String"
 										}
 									},
 									{
@@ -1340,7 +1357,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "PrimaryContact"
+											"name": "PrimaryContact",
+											"type": "String"
 										}
 									},
 									{
@@ -1349,7 +1367,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "PostalCode"
+											"name": "PostalCode",
+											"type": "String"
 										}
 									},
 									{
@@ -1358,7 +1377,8 @@
 											"type": "DateTime"
 										},
 										"sink": {
-											"name": "ValidFrom"
+											"name": "ValidFrom",
+											"type": "DateTime"
 										}
 									},
 									{
@@ -1367,7 +1387,8 @@
 											"type": "DateTime"
 										},
 										"sink": {
-											"name": "ValidTo"
+											"name": "ValidTo",
+											"type": "DateTime"
 										}
 									}
 								]
@@ -1449,7 +1470,7 @@
 											"type": "DateTime"
 										},
 										"sink": {
-											"type": "DateTime",
+											"type": "String",
 											"ordinal": 1
 										}
 									},
@@ -1459,7 +1480,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 2
 										}
 									},
@@ -1661,7 +1682,7 @@
 											"type": "Int64"
 										},
 										"sink": {
-											"type": "Int64",
+											"type": "String",
 											"ordinal": 1
 										}
 									},
@@ -1671,7 +1692,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 2
 										}
 									},
@@ -1681,7 +1702,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 3
 										}
 									},
@@ -1691,7 +1712,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 4
 										}
 									},
@@ -1701,7 +1722,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 5
 										}
 									},
@@ -1711,7 +1732,7 @@
 											"type": "DateTime"
 										},
 										"sink": {
-											"type": "DateTime",
+											"type": "String",
 											"ordinal": 6
 										}
 									},
@@ -1721,7 +1742,7 @@
 											"type": "DateTime"
 										},
 										"sink": {
-											"type": "DateTime",
+											"type": "String",
 											"ordinal": 7
 										}
 									},
@@ -1731,7 +1752,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 8
 										}
 									},
@@ -1741,7 +1762,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 9
 										}
 									},
@@ -1771,7 +1792,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 12
 										}
 									},
@@ -1781,7 +1802,7 @@
 											"type": "Decimal"
 										},
 										"sink": {
-											"type": "Decimal",
+											"type": "String",
 											"ordinal": 13
 										}
 									},
@@ -1791,7 +1812,7 @@
 											"type": "Decimal"
 										},
 										"sink": {
-											"type": "Decimal",
+											"type": "String",
 											"ordinal": 14
 										}
 									},
@@ -1801,7 +1822,7 @@
 											"type": "Decimal"
 										},
 										"sink": {
-											"type": "Decimal",
+											"type": "String",
 											"ordinal": 15
 										}
 									},
@@ -1811,7 +1832,7 @@
 											"type": "Decimal"
 										},
 										"sink": {
-											"type": "Decimal",
+											"type": "String",
 											"ordinal": 16
 										}
 									},
@@ -1821,7 +1842,7 @@
 											"type": "Decimal"
 										},
 										"sink": {
-											"type": "Decimal",
+											"type": "String",
 											"ordinal": 17
 										}
 									},
@@ -1831,7 +1852,7 @@
 											"type": "Decimal"
 										},
 										"sink": {
-											"type": "Decimal",
+											"type": "String",
 											"ordinal": 18
 										}
 									},
@@ -1841,7 +1862,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 19
 										}
 									},
@@ -1851,7 +1872,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 20
 										}
 									},
@@ -1861,7 +1882,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"type": "Int32",
+											"type": "String",
 											"ordinal": 21
 										}
 									}
