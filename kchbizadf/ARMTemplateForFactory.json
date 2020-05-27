@@ -1256,8 +1256,52 @@
 				},
 				"schema": [
 					{
-						"name": "CustomerKey",
+						"name": "CityKey",
 						"type": "INT32"
+					},
+					{
+						"name": "WWICityID",
+						"type": "INT32"
+					},
+					{
+						"name": "City",
+						"type": "UTF8"
+					},
+					{
+						"name": "StateProvince",
+						"type": "UTF8"
+					},
+					{
+						"name": "Country",
+						"type": "UTF8"
+					},
+					{
+						"name": "Continent",
+						"type": "UTF8"
+					},
+					{
+						"name": "SalesTerritory",
+						"type": "UTF8"
+					},
+					{
+						"name": "Region",
+						"type": "UTF8"
+					},
+					{
+						"name": "Subregion",
+						"type": "UTF8"
+					},
+					{
+						"name": "LatestRecordedPopulation",
+						"type": "INT64"
+					},
+					{
+						"name": "ValidFrom",
+						"type": "INT96"
+					},
+					{
+						"name": "ValidTo",
+						"type": "INT96"
 					}
 				]
 			},
@@ -1288,6 +1332,42 @@
 					{
 						"name": "CustomerKey",
 						"type": "INT32"
+					},
+					{
+						"name": "WWICustomerID",
+						"type": "INT32"
+					},
+					{
+						"name": "Customer",
+						"type": "UTF8"
+					},
+					{
+						"name": "BillToCustomer",
+						"type": "UTF8"
+					},
+					{
+						"name": "Category",
+						"type": "UTF8"
+					},
+					{
+						"name": "BuyingGroup",
+						"type": "UTF8"
+					},
+					{
+						"name": "PrimaryContact",
+						"type": "UTF8"
+					},
+					{
+						"name": "PostalCode",
+						"type": "UTF8"
+					},
+					{
+						"name": "ValidFrom",
+						"type": "INT96"
+					},
+					{
+						"name": "ValidTo",
+						"type": "INT96"
 					}
 				]
 			},
@@ -1389,6 +1469,66 @@
 				"schema": [
 					{
 						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
 					}
 				]
 			},
@@ -1415,7 +1555,104 @@
 					},
 					"compressionCodec": "snappy"
 				},
-				"schema": []
+				"schema": [
+					{
+						"name": "SaleKey",
+						"type": "INT64"
+					},
+					{
+						"name": "CityKey",
+						"type": "INT32"
+					},
+					{
+						"name": "CustomerKey",
+						"type": "INT32"
+					},
+					{
+						"name": "BillToCustomerKey",
+						"type": "INT32"
+					},
+					{
+						"name": "StockItemKey",
+						"type": "INT32"
+					},
+					{
+						"name": "InvoiceDateKey",
+						"type": "DATE"
+					},
+					{
+						"name": "DeliveryDateKey",
+						"type": "DATE"
+					},
+					{
+						"name": "SalespersonKey",
+						"type": "INT32"
+					},
+					{
+						"name": "WWIInvoiceID",
+						"type": "INT32"
+					},
+					{
+						"name": "Description",
+						"type": "UTF8"
+					},
+					{
+						"name": "Package",
+						"type": "UTF8"
+					},
+					{
+						"name": "Quantity",
+						"type": "INT32"
+					},
+					{
+						"name": "UnitPrice",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "TaxRate",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 3
+					},
+					{
+						"name": "TotalExcludingTax",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "TaxAmount",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Profit",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "TotalIncludingTax",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "TotalDryItems",
+						"type": "INT32"
+					},
+					{
+						"name": "TotalChillerItems",
+						"type": "INT32"
+					},
+					{
+						"name": "LineageKey",
+						"type": "INT32"
+					}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/kchbizdl2')]"
@@ -1718,7 +1955,7 @@
 						"type": "date"
 					},
 					{
-						"name": "Day Number",
+						"name": "DayNumber",
 						"type": "int",
 						"precision": 10
 					},
@@ -1731,47 +1968,47 @@
 						"type": "nvarchar"
 					},
 					{
-						"name": "Short Month",
+						"name": "ShortMonth",
 						"type": "nvarchar"
 					},
 					{
-						"name": "Calendar Month Number",
+						"name": "CalendarMonthNumber",
 						"type": "int",
 						"precision": 10
 					},
 					{
-						"name": "Calendar Month Label",
+						"name": "CalendarMonthLabel",
 						"type": "nvarchar"
 					},
 					{
-						"name": "Calendar Year",
+						"name": "CalendarYear",
 						"type": "int",
 						"precision": 10
 					},
 					{
-						"name": "Calendar Year Label",
+						"name": "CalendarYearLabel",
 						"type": "nvarchar"
 					},
 					{
-						"name": "Fiscal Month Number",
+						"name": "FiscalMonthNumber",
 						"type": "int",
 						"precision": 10
 					},
 					{
-						"name": "Fiscal Month Label",
+						"name": "FiscalMonthLabel",
 						"type": "nvarchar"
 					},
 					{
-						"name": "Fiscal Year",
+						"name": "FiscalYear",
 						"type": "int",
 						"precision": 10
 					},
 					{
-						"name": "Fiscal Year Label",
+						"name": "FiscalYearLabel",
 						"type": "nvarchar"
 					},
 					{
-						"name": "ISO Week Number",
+						"name": "ISOWeekNumber",
 						"type": "int",
 						"precision": 10
 					}
@@ -1799,23 +2036,28 @@
 				"schema": [
 					{
 						"name": "SaleKey",
-						"type": "bigint"
+						"type": "bigint",
+						"precision": 19
 					},
 					{
 						"name": "CityKey",
-						"type": "int"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "CustomerKey",
-						"type": "int"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "BillToCustomerKey",
-						"type": "int"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "StockItemKey",
-						"type": "int"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "InvoiceDateKey",
@@ -1827,11 +2069,13 @@
 					},
 					{
 						"name": "SalespersonKey",
-						"type": "int"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "WWIInvoiceID",
-						"type": "int"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "Description",
@@ -1843,43 +2087,59 @@
 					},
 					{
 						"name": "Quantity",
-						"type": "int"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "UnitPrice",
-						"type": "decimal"
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
 					},
 					{
 						"name": "TaxRate",
-						"type": "decimal"
+						"type": "decimal",
+						"precision": 18,
+						"scale": 3
 					},
 					{
 						"name": "TotalExcludingTax",
-						"type": "decimal"
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
 					},
 					{
 						"name": "TaxAmount",
-						"type": "decimal"
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
 					},
 					{
 						"name": "Profit",
-						"type": "decimal"
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
 					},
 					{
 						"name": "TotalIncludingTax",
-						"type": "decimal"
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
 					},
 					{
 						"name": "TotalDryItems",
-						"type": "int"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "TotalChillerItems",
-						"type": "int"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "LineageKey",
-						"type": "int"
+						"type": "int",
+						"precision": 10
 					}
 				],
 				"typeProperties": {
@@ -2033,6 +2293,174 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyDimCustomer_parquet_copy1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CopyDimCustomer",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "Dimension.Customer_V"
+							},
+							{
+								"name": "Destination",
+								"value": "raw//Customer.parquet"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CustomerKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CustomerKey",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "WWICustomerID",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "WWICustomerID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Customer",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "BillToCustomer",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BillToCustomer",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Category",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Category",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "BuyingGroup",
+											"type": "String"
+										},
+										"sink": {
+											"name": "BuyingGroup",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PrimaryContact",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PrimaryContact",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PostalCode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "PostalCode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ValidFrom",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ValidFrom",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ValidTo",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ValidTo",
+											"type": "DateTime"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "src_kchbizsqlserver_DimCustomer_tbl",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dest_kchbizdl2_DimCustomer_parquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/src_kchbizsqlserver_DimCustomer_tbl')]",
+				"[concat(variables('factoryId'), '/datasets/dest_kchbizdl2_DimCustomer_parquet')]"
+			]
 		}
 	]
 }
