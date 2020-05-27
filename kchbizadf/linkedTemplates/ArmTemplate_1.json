@@ -13,6 +13,261 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/CopyFactSale_parquet')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CopyFactSale",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "Fact.Sale_V"
+							},
+							{
+								"name": "Destination",
+								"value": "raw//Sale.parquet"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "SaleKey",
+											"type": "Int64"
+										},
+										"sink": {
+											"name": "SaleKey"
+										}
+									},
+									{
+										"source": {
+											"name": "CityKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CityKey"
+										}
+									},
+									{
+										"source": {
+											"name": "CustomerKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "CustomerKey",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "BillToCustomerKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "BillToCustomerKey"
+										}
+									},
+									{
+										"source": {
+											"name": "StockItemKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "StockItemKey"
+										}
+									},
+									{
+										"source": {
+											"name": "InvoiceDateKey",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "InvoiceDateKey"
+										}
+									},
+									{
+										"source": {
+											"name": "DeliveryDateKey",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "DeliveryDateKey"
+										}
+									},
+									{
+										"source": {
+											"name": "SalespersonKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "SalespersonKey"
+										}
+									},
+									{
+										"source": {
+											"name": "WWIInvoiceID",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "WWIInvoiceID"
+										}
+									},
+									{
+										"source": {
+											"name": "Description",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Description"
+										}
+									},
+									{
+										"source": {
+											"name": "Package",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Package"
+										}
+									},
+									{
+										"source": {
+											"name": "Quantity",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Quantity"
+										}
+									},
+									{
+										"source": {
+											"name": "UnitPrice",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "UnitPrice"
+										}
+									},
+									{
+										"source": {
+											"name": "TaxRate",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TaxRate"
+										}
+									},
+									{
+										"source": {
+											"name": "TotalExcludingTax",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TotalExcludingTax"
+										}
+									},
+									{
+										"source": {
+											"name": "TaxAmount",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TaxAmount"
+										}
+									},
+									{
+										"source": {
+											"name": "Profit",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Profit"
+										}
+									},
+									{
+										"source": {
+											"name": "TotalIncludingTax",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TotalIncludingTax"
+										}
+									},
+									{
+										"source": {
+											"name": "TotalDryItems",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "TotalDryItems"
+										}
+									},
+									{
+										"source": {
+											"name": "TotalChillerItems",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "TotalChillerItems"
+										}
+									},
+									{
+										"source": {
+											"name": "LineageKey",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "LineageKey"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "src_kchbizsqlserver_FactSale_tbl",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "dest_kchbizdl2_FactSale_parquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/_master_pipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -119,7 +374,9 @@
 				],
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/CopyFactSale_parquet')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger1')]",
