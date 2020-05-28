@@ -1272,7 +1272,7 @@
 							{
 								"activity": "CopyFactSalecsv",
 								"dependencyConditions": [
-									"Succeeded"
+									"Completed"
 								]
 							}
 						],
@@ -2338,8 +2338,9 @@
 					"recurrence": {
 						"frequency": "Day",
 						"interval": 1,
-						"startTime": "2020-04-14T13:50:00.000Z",
-						"timeZone": "UTC"
+						"startTime": "2020-04-14T09:00:00.000Z",
+						"timeZone": "UTC",
+						"schedule": {}
 					}
 				}
 			},
